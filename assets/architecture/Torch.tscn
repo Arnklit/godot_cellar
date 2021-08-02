@@ -1,0 +1,128 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://assets/models/Torch.glb" type="PackedScene" id=1]
+[ext_resource path="res://assets/materials/torch/Torch.tres" type="Material" id=2]
+[ext_resource path="res://assets/materials/fire/Fire.tres" type="Material" id=3]
+[ext_resource path="res://assets/FireMovement.gd" type="Script" id=4]
+
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0, 0.154762, 0.258929, 0.395833, 1 )
+colors = PoolColorArray( 0, 0, 0, 1, 1.61064, 0.516412, 0.270588, 1, 1.96078, 0.934558, 0.329412, 1, 1.61064, 0.516412, 0.270588, 1, 0, 0, 0, 1 )
+
+[sub_resource type="GradientTexture" id=2]
+gradient = SubResource( 1 )
+
+[sub_resource type="Curve" id=3]
+_data = [ Vector2( 0, 0.957414 ), 0.0, -0.566725, 0, 0, Vector2( 1, 0 ), -0.747574, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=4]
+curve = SubResource( 3 )
+
+[sub_resource type="ParticlesMaterial" id=5]
+lifetime_randomness = 0.25
+emission_shape = 1
+emission_sphere_radius = 0.03
+direction = Vector3( 0, -1, 0 )
+spread = 0.0
+gravity = Vector3( 0, 0.25, 0 )
+initial_velocity = 0.1
+angular_velocity = 100.0
+angular_velocity_random = 1.0
+angle = 360.0
+angle_random = 1.0
+scale = 0.2
+scale_random = 0.05
+scale_curve = SubResource( 4 )
+color_ramp = SubResource( 2 )
+hue_variation = 0.02
+hue_variation_random = 1.0
+anim_speed = 1.0
+
+[sub_resource type="QuadMesh" id=6]
+material = ExtResource( 3 )
+
+[sub_resource type="Gradient" id=7]
+offsets = PoolRealArray( 0, 0.494048, 1 )
+colors = PoolColorArray( 0, 0, 0, 1, 1.96078, 0.934558, 0.329412, 1, 0, 0, 0, 1 )
+
+[sub_resource type="GradientTexture" id=8]
+gradient = SubResource( 7 )
+
+[sub_resource type="ParticlesMaterial" id=9]
+lifetime_randomness = 0.5
+trail_divisor = 40
+emission_shape = 1
+emission_sphere_radius = 0.1
+direction = Vector3( 0, 1, 0 )
+spread = 15.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 2.0
+initial_velocity_random = 0.5
+angular_velocity = 100.0
+angular_velocity_random = 1.0
+tangential_accel = 3.0
+tangential_accel_random = 1.0
+damping = 1.0
+angle = 360.0
+angle_random = 1.0
+scale = 0.01
+scale_curve = SubResource( 4 )
+color_ramp = SubResource( 8 )
+hue_variation = 0.02
+hue_variation_random = 1.0
+anim_speed = 1.0
+
+[sub_resource type="QuadMesh" id=10]
+material = ExtResource( 3 )
+
+[sub_resource type="CapsuleShape" id=11]
+radius = 0.0271003
+height = 0.483004
+
+[sub_resource type="CapsuleShape" id=12]
+radius = 0.0827268
+height = 0.110095
+
+[node name="Torch" instance=ExtResource( 1 )]
+
+[node name="Torch" parent="." index="0"]
+material/0 = ExtResource( 2 )
+
+[node name="Flames" type="Particles" parent="." index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.296384, 0.315135 )
+amount = 140
+lifetime = 3.0
+preprocess = 3.0
+local_coords = false
+draw_order = 2
+process_material = SubResource( 5 )
+draw_pass_1 = SubResource( 6 )
+
+[node name="Sparks" type="Particles" parent="Flames" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.233609, 0 )
+amount = 400
+lifetime = 0.4
+preprocess = 3.0
+local_coords = false
+draw_order = 2
+process_material = SubResource( 9 )
+draw_pass_1 = SubResource( 10 )
+
+[node name="OmniLight" type="OmniLight" parent="." index="2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.514477, 0.458806 )
+light_color = Color( 1, 0.74902, 0.517647, 1 )
+light_energy = 6.0
+shadow_enabled = true
+shadow_bias = 0.03
+omni_attenuation = 6.59754
+script = ExtResource( 4 )
+
+[node name="StaticBody" type="StaticBody" parent="." index="3"]
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody" index="0"]
+transform = Transform( 1, 0, 0, 0, 0.541488, 0.840708, 0, -0.840708, 0.541488, -5.96046e-08, 0.00502122, 0.143752 )
+shape = SubResource( 11 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="StaticBody" index="1"]
+transform = Transform( 1, 0, 0, 0, 0.541488, 0.840708, 0, -0.840708, 0.541488, -5.96046e-08, 0.293752, 0.323702 )
+shape = SubResource( 12 )

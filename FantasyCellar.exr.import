@@ -1,0 +1,24 @@
+[remap]
+
+importer="texture_array"
+type="TextureArray"
+path="res://.import/FantasyCellar.exr-a57b52770e76dd6c9b8b581eb78154e8.texarr"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://FantasyCellar.exr"
+dest_files=[ "res://.import/FantasyCellar.exr-a57b52770e76dd6c9b8b581eb78154e8.texarr" ]
+
+[params]
+
+compress/mode=0
+compress/no_bptc_if_rgb=false
+flags/repeat=false
+flags/filter=true
+flags/mipmaps=false
+flags/srgb=false
+slices/horizontal=1
+slices/vertical=8
