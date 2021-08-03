@@ -5,4 +5,4 @@ A scene to test Godot's 3D capabilities. The scene was made with Godot 3.3.2.Sta
 
 # License
 - This Godot Project is available under the MIT license. See LICENSE.MD for details
-- All the art assets are made by me and are undert CC0 license. The original art files are available here https://github.com/Arnklit/godot_cellar_art
+- All the art assets are made by me and are under CC0 license. The original art files are available here https://github.com/Arnklit/godot_cellar_art
